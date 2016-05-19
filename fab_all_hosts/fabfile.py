@@ -11,7 +11,7 @@ env.roledefs = {
             'ec2-52-62-100-249.ap-southeast-2.compute.amazonaws.com',
             'ec2-52-63-51-250.ap-southeast-2.compute.amazonaws.com',
             'ec2-52-62-53-160.ap-southeast-2.compute.amazonaws.com'],
-    'dn':  ['ec2-52-62-53-160.ap-southeast-2.compute.amazonaws.com']    
+    'dn':  ['ec2-52-62-186-210.ap-southeast-2.compute.amazonaws.com']    
 }
 
 env.warn_only = True
