@@ -4,12 +4,14 @@ from fabric.api import env
 
 # host list 
 env.roledefs = {
-    'cm': ['ec2-52-63-17-219.ap-southeast-2.compute.amazonaws.com'],
-    'nn1': ['ec2-52-63-192-102.ap-southeast-2.compute.amazonaws.com'],
-    'nn2': ['ec2-52-62-35-187.ap-southeast-2.compute.amazonaws.com'],
-    'dn':  ['ec2-52-63-163-14.ap-southeast-2.compute.amazonaws.com', 
-            'ec2-52-63-126-80.ap-southeast-2.compute.amazonaws.com',
-            'ec2-52-62-214-118.ap-southeast-2.compute.amazonaws.com']
+    'cm': ['ec2-52-63-31-127.ap-southeast-2.compute.amazonaws.com'],
+    'nn1': ['ec2-52-63-157-60.ap-southeast-2.compute.amazonaws.com'],
+    'nn2': ['ec2-52-63-43-177.ap-southeast-2.compute.amazonaws.com'],
+    '_dn':  ['ec2-52-63-185-217.ap-southeast-2.compute.amazonaws.com', 
+            'ec2-52-62-100-249.ap-southeast-2.compute.amazonaws.com',
+            'ec2-52-63-51-250.ap-southeast-2.compute.amazonaws.com',
+            'ec2-52-62-53-160.ap-southeast-2.compute.amazonaws.com'],
+    'dn':  ['ec2-52-62-53-160.ap-southeast-2.compute.amazonaws.com']    
 }
 
 env.warn_only = True

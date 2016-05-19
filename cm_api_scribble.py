@@ -6,7 +6,7 @@ from cm_api.endpoints.cms import ClouderaManager
 
 CM_HOST = "ec2-52-63-31-127.ap-southeast-2.compute.amazonaws.com"
  
-api = ApiResource(CM_HOST, username="admin", password="abc123")
+api = ApiResource(CM_HOST, username="admin", password="cr1pt0n1t3")
 cm = ClouderaManager(api)
 
 cluster = api.get_cluster('cluster')
@@ -50,6 +50,24 @@ for service in cluster.get_all_services():
 for app in yarn.get_yarn_applications(lastHour, now, filter_str = "state=RUNNING").applications:
   print app
 
+
+for host in api.get_all_hosts('full'):
+  print host
+
+for role in hdfs.get_all_roles():
+    print role
+
+
+name = 'ip-172-31-7-39.ap-southeast-2.compute.internal'
+'''
+host = api.create_host(
+      name,                             # Host id
+      name,                             # Host name (FQDN)
+      '172.31.7.39',                    # IP address
+      "/default_rack")                  # Rack
+'''
+
+hdfs.create_role("hdfs-4", "DATANODE", name)
 
 '''
 print "Decommissioning hosts. This might take a few minutes."
