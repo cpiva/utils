@@ -58,16 +58,17 @@ for role in hdfs.get_all_roles():
     print role
 
 
-name = 'ip-172-31-7-39.ap-southeast-2.compute.internal'
+name = 'ip-172-31-13-104.ap-southeast-2.compute.internal'
 '''
 host = api.create_host(
       name,                             # Host id
       name,                             # Host name (FQDN)
-      '172.31.7.39',                    # IP address
-      "/default_rack")                  # Rack
+      '172.31.13.104',                  # IP address
+      "/default")                       # Rack
 '''
 
-hdfs.create_role("hdfs-4", "DATANODE", name)
+hdfs.create_role("hdfs-DATANODE-666de03be971c57ca4ad39c128c9789b", "DATANODE", name)
+
 
 '''
 print "Decommissioning hosts. This might take a few minutes."
@@ -97,3 +98,8 @@ print "Hosts successfully inspected: \n" + cmd.resultMessage
 #cmd = cmd.wait()
 #print "Active: %s. Success: %s" % (cmd.active, cmd.success)
 '''
+
+#rsync -a /dfs/dn -e "ssh -i carlo-kp.pem" ec2-user@ip-172-31-14-78.ap-southeast-2.compute.internal:/dfs
+#sudo rsync -rtvz /dfs/dn --rsh "ssh -i carlo-kp.pem" --rsync-path "rsync" ec2-user@ip-172-31-13-104.ap-southeast-2.compute.internal:/dfs
+#sudo yum -y install cloudera-manager-agent
+#fab -u ec2-user -i /Users/cpiva/Desktop/carlo-kp.pem disable_iptables disable_ipv6 disable_selinux disable_transparent_hugepage install_wget
