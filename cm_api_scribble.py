@@ -4,7 +4,7 @@ from datetime import datetime, timedelta
 from cm_api.api_client import ApiResource
 from cm_api.endpoints.cms import ClouderaManager
 
-CM_HOST = "ec2-52-63-31-127.ap-southeast-2.compute.amazonaws.com"
+CM_HOST = "ec2-52-64-91-202.ap-southeast-2.compute.amazonaws.com"
  
 api = ApiResource(CM_HOST, username="admin", password="cr1pt0n1t3")
 cm = ClouderaManager(api)
@@ -57,17 +57,15 @@ for host in api.get_all_hosts('full'):
 for role in hdfs.get_all_roles():
     print role
 
-
-name = 'ip-172-31-13-104.ap-southeast-2.compute.internal'
+name = 'ip-172-31-1-41.ap-southeast-2.compute.internal'
 '''
 host = api.create_host(
       name,                             # Host id
       name,                             # Host name (FQDN)
-      '172.31.13.104',                  # IP address
+      '172.31.1.41',                  # IP address
       "/default")                       # Rack
 '''
-
-hdfs.create_role("hdfs-DATANODE-666de03be971c57ca4ad39c128c9789b", "DATANODE", name)
+hdfs.create_role("hdfs-DATANODE-d9e6f8fa1cc8955d1fa5d2f17088e4e7", "DATANODE", name)
 
 
 '''
