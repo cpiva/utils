@@ -4,7 +4,7 @@ from fabric.api import env
 
 # host list 
 env.roledefs = {
-    'dn':['ec2-52-64-106-99.ap-southeast-2.compute.amazonaws.com'],
+    'dn':['ec2-52-63-226-42.ap-southeast-2.compute.amazonaws.com']
 }
 
 env.warn_only = True
@@ -22,6 +22,10 @@ def create_dfs_dir():
 @roles("dn")
 def update():
     sudo("yum -y update", pty=True)
+
+@roles("dn")
+def temp_set_hostname():
+    sudo("sudo hostname cm.qant.tech")
 
 @roles("dn")
 def sync_ntp():
