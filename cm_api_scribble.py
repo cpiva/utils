@@ -7,7 +7,7 @@ from cm_api.endpoints.cms import ClouderaManager
 
 CM_HOST = "ec2-52-64-235-74.ap-southeast-2.compute.amazonaws.com"
  
-api = ApiResource(CM_HOST, username="admin", password="cr1pt0n1t3")
+api = ApiResource(CM_HOST, username="admin", password="abc123")
 cm = ClouderaManager(api)
 cluster = api.get_cluster('cluster')
 
