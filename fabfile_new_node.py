@@ -2,9 +2,9 @@ from fabric.api import *
 from fabric.contrib.console import confirm
 from fabric.api import env
 
-# host list 
+# host list
 env.roledefs = {
-    'dn':['ec2-52-63-226-42.ap-southeast-2.compute.amazonaws.com']
+    'dn':['ec2-52-63-81-58.ap-southeast-2.compute.amazonaws.com']
 }
 
 env.warn_only = True
@@ -22,10 +22,6 @@ def create_dfs_dir():
 @roles("dn")
 def update():
     sudo("yum -y update", pty=True)
-
-@roles("dn")
-def temp_set_hostname():
-    sudo("sudo hostname cm.qant.tech")
 
 @roles("dn")
 def sync_ntp():
@@ -55,7 +51,33 @@ def install_wget():
 
 @roles("dn")
 def upload_private_key():
-    put("/Users/cpiva/Desktop/carlo-kp.pem","/home/ec2-user/")
+    put("/Users/abisultan/Downloads/carlo-kp.pem","/home/ec2-user/")
+
+@roles("dn")
+def upload_cm_repo():
+    sudo("mkdir /tmp/")
+    sudo("chmod 777 /tmp/")
+    put("/Users/abisultan/workspace/files/cloudera-manager.repo","/tmp/")
+    sudo("mv /tmp/cloudera-manager.repo /etc/yum.repos.d/")
+
+@roles("dn")
+def install_cm_agent():
+    sudo("yum install -y cloudera-manager-agent")
+
+@roles("dn")
+def upload_cm_config():
+    put("/Users/abisultan/workspace/files/config.ini","/tmp/")
+    sudo("mv /tmp/config.ini /etc/cloudera-scm-agent/")
+
+
+@roles("dn")
+def create_scm_user():
+    sudo("useradd cloudera-scm")
+    sudo("chown cloudera-scm /etc/cloudera-scm-agent/config.ini")
+
+@roles("dn")
+def start_cm_agent():
+    sudo("service cloudera-scm-agent start")
 
 @roles("dn")
 def disable_selinux():
@@ -80,7 +102,7 @@ def install_java_rpm():
 
 @roles("dn")
 def install_java():
-    sudo("sudo yum install oracle-j2sdk1.7")   
+    sudo("sudo yum install oracle-j2sdk1.7")
 
 @roles("dn")
 def set_swappiness():
@@ -89,4 +111,3 @@ def set_swappiness():
 @roles("dn")
 def disable_transparent_hugepage():
     sudo("echo never > /sys/kernel/mm/transparent_hugepage/defrag")
-

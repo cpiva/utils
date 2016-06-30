@@ -5,9 +5,9 @@ from datetime import datetime, timedelta
 from cm_api.api_client import ApiResource
 from cm_api.endpoints.cms import ClouderaManager
 
-CM_HOST = "ec2-52-64-235-74.ap-southeast-2.compute.amazonaws.com"
- 
-api = ApiResource(CM_HOST, username="admin", password="abc123")
+CM_HOST = "52.65.6.188"
+
+api = ApiResource(CM_HOST, username="admin", password="abcd1234")
 cm = ClouderaManager(api)
 cluster = api.get_cluster('cluster')
 
@@ -42,7 +42,7 @@ def print_metrics():
 
 def print_yarn_apps():
   now = datetime.today()
-  lastHr = datetime.today() - timedelta(hours = 1)   
+  lastHr = datetime.today() - timedelta(hours = 1)
   for app in get_service("YARN").get_yarn_applications(lastHr, now, filter_str = "state=RUNNING").applications:
     print app
 
@@ -56,10 +56,10 @@ def delete_host():
   api.delete_host()
 
 def add_datanode_role():
-  name = 'ip-172-31-9-17.ap-southeast-2.compute.internal'
+  name = 'ip-172-31-4-127.ap-southeast-2.compute.internal'
   xid = str(uuid.uuid4()).replace('-','')
   #get_service("HDFS").create_role("hdfs-DATANODE-" + xid, "DATANODE", name)
-  get_service("HDFS").create_role("hdfs-DATANODE-ac05b2e3cafc01531b61c12e304b2c04", "DATANODE", name)
+  get_service("HDFS").create_role("hdfs-DATANODE-e1e47f981a83ba401041bb1c6347a39d", "DATANODE", name)
 
 def inspect_hosts():
   print "Inspecting hosts. This might take a few minutes."
@@ -83,13 +83,13 @@ def restart_hdfs():
   print "Active: %s. Success: %s" % (cmd.active, cmd.success)
 
 def main():
-  #restart_hdfs()  
+  #restart_hdfs()
   #inspect_hosts()
   #print_yarn_apps()
   #inspect_hdfs()
   #list_roles()
-  list_hosts()
-  #add_datanode_role()
-  delete_host()
-  
+  #list_hosts()
+  add_datanode_role()
+  #delete_host()
+
 if __name__ == "__main__": main()
